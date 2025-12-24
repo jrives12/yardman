@@ -1,8 +1,13 @@
 require_relative 'yardman'
 require_relative 'info'
 
+API_KEY = ENV['API_KEY']
 
-choice = `dialog --menu "Select" 0 0 0 1 "Option 1" 2 "Option 2" 3 "Exit" 2>&1 </dev/tty >/dev/tty`.strip
+zones = get_zones(api_key)
+
+menu_items = zones.each_with_index.map { |zone, index| "#{index + 1} \"#{zone["name"]}\"" }.join(' ')
+
+choice = `dialog --menu "Select" 0 0 0 1 #{menu_items} 2>&1 </dev/tty >/dev/tty`.strip
 
 case choice
 when "1"
