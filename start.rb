@@ -7,7 +7,7 @@ HEIGHT = 20
 WIDTH = 60
 
 def page_zone
-  zones = get_zone(API_KEY)
+  zones = get_zones(API_KEY)
   loop do
     menu_items = zones.each_with_index.map { |zone, index| "#{index + 1} \"#{zone["name"]}\"" }.join(' ')
     
